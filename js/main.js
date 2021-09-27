@@ -55,15 +55,17 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function dialogue(text, x, y) {
+async function dialogue(text, size = "15px", font = "Arial", x, y) {
  let dialogText = "" 
- for (let i = 0; i < text.split("").length; i++) {
+ let strArr = text.split("")
+ for (let i = 0; i < strArr.length; i++) {
 	ctx.clearRect(0, 0, cnv.width, cnv.height)
-	dialogText += text.split("")[i]
-	createText("30px Arial", dialogText, x, y)
+	dialogText += strArr[i]
+	createText(`${size} ${font}`, dialogText, x, y)
 	await sleep(500)
  }
 
 }
 
-dialogue("hello", 0, 30);
+dialogue("hello", undefined, undefined, 0, 30);
+
