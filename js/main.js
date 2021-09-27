@@ -51,22 +51,19 @@ bckBtn.addEventListener("click", sceneBackward);
 //   );
 
 // }
-
-function dialogue(text, x, y) {
-  let xPos = x;
-  let yPos = y;
-  let splitText = text.split("");
-  let splitNum = 0;
-  let splitSum = "";
-  let writeText = setInterval(function () {
-    if (splitNum <= splitText.length) {
-      createText("30px Arial", splitSum + splitText[splitNum], xPos, yPos);
-      splitNum++;
-      xPos += 13;
-    } else {
-      clearInterval(writeText);
-    }
-  }, 1000);
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-dialogue("hello", 30, 30);
+async function dialogue(text, x, y) {
+ let dialogText = "" 
+ for (let i = 0; i < text.split("").length; i++) {
+	ctx.clearRect(0, 0, cnv.width, cnv.height)
+	dialogText += text.split("")[i]
+	createText("30px Arial", dialogText, x, y)
+	await sleep(500)
+ }
+
+}
+
+dialogue("hello", 0, 30);
